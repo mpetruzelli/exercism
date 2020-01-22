@@ -1,48 +1,46 @@
 /*
-Package bob prints simple text based on user input, because AI is just "Add Ifs" right?
+Package bob implements a simple chatbot.
 
-User inputs that will elicit specific output:
+bob responds to text input in the following ways:
 
-Simple question: 'Sure.'
-Upper-case statement: 'Whoa, chill out!'
-Upper-case question: 'Calm down, I know what I'm doing!'
-No input: 'Fine. Be that way!'
-All other input: 'Whatever.'
+Lower-cased question: "Sure."
+Upper-cased question: "Calm down, I know what I'm doing!"
+Upper-cased statement: "Whoa, chill out!"
+Null text input: "Fine. Be that way!"
+Other: "Whatever."
+
 */
-package bob
+package main
 
 import (
+	"bufio"
+	"fmt"
+	"os"
 	"strings"
 )
 
-// Hey should have a comment documenting it.
+func main() {
+
+	input := UserInput()
+	fmt.Println(input)
+
+}
+
+// Responds to the user input as bob
 func Hey(remark string) string {
-	remark = strings.TrimSpace(remark)
-	switch {
-	case isQuestion(remark) && isYelling(remark):
-		return "Calm down, I know what I'm doing!"
-	case isQuestion(remark) && !isYelling(remark):
-		return "Sure."
-	case !isQuestion(remark) && isYelling(remark):
-		return "Whoa, chill out!"
-	case len(remark) == 0:
-		return "Fine. Be that way!"
-	default:
-		return "Whatever."
-	}
-
+	// Write some code here to pass the test suite.
+	// Then remove all the stock comments.
+	// They're here to help you get started but they only clutter a finished solution.
+	// If you leave them in, reviewers may protest!
+	return ""
 }
 
-func isQuestion(input string) bool {
-	if strings.HasSuffix(input, "?") {
-		return true
-	}
-	return false
-}
-
-func isYelling(input string) bool {
-	if strings.ToUpper(input) == input && input != strings.ToLower(input) {
-		return true
-	}
-	return false
+// Take user input and return that input
+func UserInput() string {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("What's up?")
+	fmt.Print("-> ")
+	input, _ := reader.ReadString('\n')
+	sanitizedInput := strings.Replace(input, "\n", "", -1)
+	return sanitizedInput
 }
